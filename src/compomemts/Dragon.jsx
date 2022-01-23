@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Header from "./all/Header";
-import dragonImg from '../img/dragon.png';
-import '../style/DragonTypeInfo.css'
-const DragonTypeInfo = (props) => {
+import dragonImg from '../img/image 12.png';
+import '../style/Dragon.css'
+const Dragon = (props) => {
     console.log(props.dragon)
     const [type,setType] = useState(props.dragon.type);
     const [className,setClassName] = useState(props.dragon.class);
@@ -22,7 +22,7 @@ const DragonTypeInfo = (props) => {
     return (
         <div className="dragon-info">
             <h2>{type}</h2><br/>
-            <img src={dragonImg} width="250" height="auto" alt="..."/>
+            <img src={dragonImg} alt="..."/>
             <h3>Main information</h3>
             Class: {className}<br/>
             Rarity: {rarity}<br/>
@@ -31,16 +31,19 @@ const DragonTypeInfo = (props) => {
             Mating Season: {mating_season} <br/>
             Hatching Age: {hatching_age} <br/>
             Puberty Age: {puberty_age} <br/>
-            Way of Taming: {way_of_taming}<br/>
+            <h4>Way of Taming</h4>
+            {way_of_taming}<br/>
             <h4>Appearance</h4>
             size: {size}<br/>
             color: {color}<br/>
             type of fire: {fireType}<br/>
             features: {features}<br/>
            <h4> Food</h4>
-            {food.map((f, index) =>
+
+            {
+                food.map((f, index) =>
                 f
-            )}<br/>
+            )}
             <h4>Habitat</h4>
             {habitat.map((place,index) =>
                 place
@@ -49,4 +52,4 @@ const DragonTypeInfo = (props) => {
     );
 };
 
-export default DragonTypeInfo;
+export default Dragon;

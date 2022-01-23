@@ -5,7 +5,7 @@ import './style/App.css'
 import 'normalize.css'
 import Auth from "./compomemts/all/Auth";
 import AppRouter from "./compomemts/AppRouter";
-import DragonTypeInfo from "./compomemts/DragonTypeInfo";
+import Dragon from "./compomemts/Dragon";
 import {BrowserRouter} from "react-router-dom";
 import OrderDesk from "./compomemts/OrderDesk";
 
@@ -48,8 +48,7 @@ function App() {
        */
 
             <div className="app">
-                <Header/>
-                <OrderDesk/>
+                <Dragon dragon={dragon}/>
             </div>
 
 
