@@ -1,0 +1,67 @@
+.registration-form, .authentication-form {
+width: 100%;
+    background-image: url("/public/dragon_back_1.png"), url("/public/dragon_back_2.png");
+    background-position: left bottom, right top;
+    background-size: auto 80%, auto 80%;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.authentication-form {
+    height: 430px;
+}
+form {
+    margin: 0 auto;
+    padding: 15px;
+    text-align: center;
+    border: 3px solid teal;
+    width: 50%;
+
+}
+
+a {
+    color: darkgrey;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+a:hover {
+    color: lightseagreen;
+}
+
+form label {
+    font-size: 14px;
+}
+
+form span {
+    color: darkgrey;
+    font-size: 12px;
+}
+
+.outing-form {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.outing-form form {
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-content:space-between;
+   transform: scale(0);
+    color: black;
+}
+
+.outing-form .active {
+    transform: scale(1);
+    width: 250px;
+    height: 200px;
+}

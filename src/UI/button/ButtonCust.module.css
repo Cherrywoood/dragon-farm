@@ -1,0 +1,15 @@
+.ButtonCust {
+    padding: 5px 15px;
+    color: white;
+    background: teal;
+    border: teal;
+    cursor: pointer;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 14px;
+    font-family: "Century Gothic", serif;
+}
+
+.ButtonCust:focus {
+    background: lightseagreen;
+}

@@ -1,0 +1,6 @@
+.app {
+   font-family: "Century Gothic", serif;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}

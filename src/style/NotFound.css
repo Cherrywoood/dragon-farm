@@ -1,0 +1,16 @@
+.not-found {
+    margin: 50px auto;
+    width: 50%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: teal;
+}
+.not-found span {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.not-found span span{
+    font-size: 10px;
+}

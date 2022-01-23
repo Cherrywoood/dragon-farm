@@ -1,0 +1,12 @@
+.inputCast {
+    width: 100%;
+    border: 1px solid teal;
+    margin: 5px 0;
+    font-size: 14px;
+    font-family: "Century Gothic", serif;
+    box-sizing: border-box;
+}
+
+.inputCast:focus {
+
+}
