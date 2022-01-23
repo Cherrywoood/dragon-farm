@@ -15,7 +15,7 @@ const Auth = () => {
         e.preventDefault();
         //валидация
         const user_info = {
-            login: login,
+            userName: login,
             password: password
         };
         console.log(user_info)
@@ -30,7 +30,7 @@ const Auth = () => {
     }
     return (
         <div className='authentication-form'>
-            <form>
+            <form onSubmit={authentication}>
                 <h2>Authentication</h2>
                 <label htmlFor="login">Login: </label>
                 <InputCust value={login}

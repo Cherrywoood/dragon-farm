@@ -8,7 +8,11 @@ import AppRouter from "./compomemts/AppRouter";
 import Dragon from "./compomemts/Dragon";
 import {BrowserRouter} from "react-router-dom";
 import OrderDesk from "./compomemts/OrderDesk";
-
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
+import MyProgressBar from "./compomemts/all/MyProgressBar";
+import DragonCard from "./compomemts/DragonCard";
+import DragonCardList from "./compomemts/DragonCardList";
 
 
 function App() {
@@ -39,17 +43,15 @@ function App() {
 
 
     return (
-        /* <BrowserRouter>
+        <BrowserRouter>
              <div className="app">
                  <Header/>
                  <AppRouter dragon={dragon}/>
              </div>
          </BrowserRouter>
-       */
 
-            <div className="app">
-                <Dragon dragon={dragon}/>
-            </div>
+
+
 
 
     );

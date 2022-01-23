@@ -13,3 +13,8 @@
 .ButtonCust:focus {
     background: lightseagreen;
 }
+
+.ButtonCust:disabled {
+    cursor: not-allowed;
+    background: dimgray;
+}

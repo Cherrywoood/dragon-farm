@@ -17,8 +17,7 @@ const Dragon = (props) => {
     const [color,setColor] = useState(props.dragon.appearance.color);
     const [fireType,setFireTyp] = useState(props.dragon.appearance.fire_type);
     const [features,setFeatures] = useState(props.dragon.appearance.features);
-    const [food,setFood] = useState(props.dragon.food);
-    const [habitat,setHabitat] = useState(props.dragon.habitat);
+
     return (
         <div className="dragon-info">
             <h2>{type}</h2><br/>
@@ -38,16 +37,7 @@ const Dragon = (props) => {
             color: {color}<br/>
             type of fire: {fireType}<br/>
             features: {features}<br/>
-           <h4> Food</h4>
 
-            {
-                food.map((f, index) =>
-                f
-            )}
-            <h4>Habitat</h4>
-            {habitat.map((place,index) =>
-                place
-            )}
         </div>
     );
 };

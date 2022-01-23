@@ -6,117 +6,118 @@ import axios from "axios";
 import '../../style/Form.css'
 
 
-
 const Reg = () => {
-
-
     const [name, setName] = useState('')
-    const [nameValid, setNameValid] = useState(false)
-    const [nameError, setNameError] = useState('')
+    const [nameDirty, setNameDirty] = useState(false)
+    const [nameError, setNameError] = useState('Can\'t be empty')
 
     const [surname, setSurname] = useState('')
-    const [surnameValid, setSurnameValid] = useState(false)
-    const [surnameError, setSurnameError] = useState('')
+    const [surnameDirty, setSurnameDirty] = useState(false)
+    const [surnameError, setSurnameError] = useState('Can\'t be empty')
 
     const [gender, setGender] = useState('')
-    const [genderValid, setGenderValid] = useState(false)
-    const [genderError, setGenderError] = useState('')
 
     const [date, setDate] = useState('')
-    const [dateValid, setDateValid] = useState(false)
-    const [dateError, setDateError] = useState('')
+    const [dateDirty, setDateDirty] = useState(false)
+    const [dateError, setDateError] = useState('Can\'t be empty')
 
     const [password, setPassword] = useState('')
-    const [passwordValid, setPasswordValid] = useState(false)
-    const [passwordError, setPasswordError] = useState('')
+    const [passwordDirty, setPasswordDirty] = useState(false)
+    const [passwordError, setPasswordError] = useState('Can\'t be empty')
 
     const [login, setLogin] = useState('')
-    const [loginValid, setLoginValid] = useState(false)
-    const [loginError, setLoginError] = useState('')
+    const [loginDirty, setLoginDirty] = useState(false)
+    const [loginError, setLoginError] = useState('Can\'t be empty')
     const [formValid, setFormValid] = useState(false)
 
-    const handleChange = (e) => {
-        setGender(e.target.value);
-    }
-
-    useEffect(()=> {
-        if(nameValid && surnameValid && genderValid && dateValid && loginValid && passwordValid)
-            setFormValid(true)
-        else setFormValid(false)
-    })
-    const validHandler = () => {
-        if (name === '') {
-            setNameError('Can\'t be empty')
-            setNameValid(false)
+    const blurHandler = (e) => {
+        switch (e.target.name) {
+            case 'name':
+                setNameDirty(true)
+                break
+            case 'surname':
+                setSurnameDirty(true)
+                break
+            case 'date':
+                setDateDirty(true)
+                break
+            case 'login':
+                setLoginDirty(true)
+                break
+            case 'password':
+                setPasswordDirty(true)
+                break
         }
-        else {
-            setNameValid(true)
+    }
+    const nameHandler = (e) => {
+        setName(e.target.value)
+        if (e.target.value === '') {
+            setNameError('Can\'t be empty')
+        } else {
             setNameError('')
         }
-
-        if (surname === '') {
+    }
+    const surnameHandler = (e) => {
+        setSurname(e.target.value)
+        if (e.target.value === '') {
             setSurnameError('Can\'t be empty')
-            setSurnameValid(false)
-        }
-        else {
-            setSurnameValid(true)
+        } else {
             setSurnameError('')
         }
-
-        if (date === '') {
-            setDateValid('Can\'t be empty')
-            setDateValid(false)
-        }
-        else {
-            setDateValid(true)
+    }
+    const genderHandler = (e) => {
+        setGender(e.target.value)
+    }
+    const dateHandler = (e) => {
+        setDate(e.target.value)
+        if (e.target.value === '') {
+            setDateError('Can\'t be empty')
+        } else {
             setDateError('')
         }
-        if (gender === '') {
-            setGenderError('Can\'t be empty')
-            setGenderValid(false)
-        }
-        else {
-            setGenderValid(true)
-            setGenderError('')
-        }
-        if (login === '') {
+    }
+    const loginHandler = (e) => {
+        setLogin(e.target.value)
+        if (e.target.value === '') {
             setLoginError('Can\'t be empty')
-            setLoginValid(false)
-        }
-        else {
-            setLoginValid(true)
+        } else {
             setLoginError('')
         }
-        if (password.length < 8) {
-            if (password === "") setPasswordError('Can\'t be empty')
+    }
+    const passwordHandler = (e) => {
+        setPassword(e.target.value)
+        if (e.target.value.length < 8) {
+            if (e.target.value === "") setPasswordError('Can\'t be empty')
             else setPasswordError('Length must be greater than 8')
-            setPasswordValid(false)
         } else {
-            setPasswordValid(true)
             setPasswordError('')
         }
     }
+    useEffect(() => {
+
+        if (nameError || surnameError || dateError || loginError || passwordError)
+            setFormValid(false)
+        else setFormValid(true)
+    }, [nameError,surnameError,dateError,loginError,passwordError])
+
     const registration = (e) => {
         e.preventDefault();
-        //такой логин уже существует
 
-
-        validHandler()
-        if(formValid) {
+        if (formValid) {
             const user_info = {
                 name: name,
                 surname: surname,
                 gender: gender,
-                date: date,
-                login: login,
+                dateOfBirth: date,
+                userName: login,
                 password: password
             };
             console.log(user_info)
-       axios.post(`http://localhost:8080/user/register`, { user_info })
-                 .then(res => {
-                     console.log(res);
-                 }).catch((res)=>
-                     console.log(res))
+            axios.post(`http://localhost:8080/user/register`, {user_info})
+                .then(res => {
+                    console.log(res);
+                }).catch((res) =>
+                console.log(res))
         } else console.log('форма не валидна')
 
     }
@@ -126,49 +127,69 @@ const Reg = () => {
             <form onSubmit={registration}>
                 <h2>Registration</h2>
                 <label htmlFor="name">Name: </label>
-                {!nameValid && nameError && <div style={{color: 'red'}}>{nameError}</div>}
+                {nameDirty && nameError && <div style={{color: 'red'}}>{nameError}</div>}
                 <InputCust value={name}
                            id="name"
+                           name="name"
                            type="text"
-                           onChange={(e) => setName(e.target.value)}/> <br/>
+                           onBlur={e => blurHandler(e)}
+                           onChange={e => nameHandler(e)}/> <br/>
                 <label htmlFor="surname">Surname: </label>
-                {!surnameValid && surnameError && <div style={{color:'red'}}>{surnameError}</div>}
+                {surnameDirty && surnameError && <div style={{color: 'red'}}>{surnameError}</div>}
                 <InputCust value={surname}
                            id="surname"
+                           name="surname"
                            type="text"
-                           onChange={(e) => setSurname(e.target.value)}/> <br/>
+                           onBlur={e => blurHandler(e)}
+                           onChange={e => surnameHandler(e)}/> <br/>
 
                 Gender: <br/>
-                {!genderValid && genderError && <div style={{color:'red'}}>{genderError}</div>}
-                <input type="radio" value="male" id="male"
-                       onChange={handleChange} name="gender"/>
-                <label htmlFor="male">Male      </label>
+                <input type="radio"
+                       value="male"
+                       id="male"
+                       onBlur={e => blurHandler(e)}
+                       onChange={e => genderHandler(e)}
+                       name="gender"
+                       checked={true}
+                />
+                <label htmlFor="male">Male </label>
 
-                <input type="radio" value="female" id="female"
-                       onChange={handleChange} name="gender"/>
+                <input type="radio"
+                       value="female"
+                       id="female"
+                       onBlur={e => blurHandler(e)}
+                       onChange={e => genderHandler(e)}
+                       name="gender"
+                />
                 <label htmlFor="female">Female</label> <br/>
 
                 <label htmlFor="date">Date of Birth: </label>
-                {!dateValid && dateError && <div style={{color:'red'}}>{dateError}</div>}
+                {dateDirty && dateError && <div style={{color: 'red'}}>{dateError}</div>}
                 <InputCust value={date}
                            id="date"
+                           name="date"
                            type="date"
-                           onChange={(e) => setDate(e.target.value)}/> <br/>
+                           onBlur={e => blurHandler(e)}
+                           onChange={(e) => dateHandler(e)}/> <br/>
 
                 <label htmlFor="login">Login: </label>
-                {!loginValid && loginError && <div style={{color:'red'}}>{loginError}</div>}
+                {loginDirty && loginError && <div style={{color: 'red'}}>{loginError}</div>}
                 <InputCust value={login}
                            id="login"
+                           name="login"
                            type="text"
-                           onChange={(e) => setLogin(e.target.value)}/> <br/>
+                           onBlur={e => blurHandler(e)}
+                           onChange={(e) => loginHandler(e)}/> <br/>
 
                 <label htmlFor="password">Password: </label>
-                {!passwordValid && passwordError && <div style={{color:'red'}}>{passwordError}</div>}
+                {passwordDirty && passwordError && <div style={{color: 'red'}}>{passwordError}</div>}
                 <InputCust value={password}
                            id="password"
+                           name="password"
                            type="password"
-                           onChange={(e) => setPassword(e.target.value)}/>
-                <ButtonCust type="submit">Sign Up</ButtonCust>
+                           onBlur={e => blurHandler(e)}
+                           onChange={(e) => passwordHandler(e)}/>
+                <ButtonCust type="submit" disabled={!formValid}>Sign Up</ButtonCust>
             </form>
         </div>
     );
