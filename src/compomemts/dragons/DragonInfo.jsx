@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Header from "./all/Header";
-import dragonImg from '../img/image 12.png';
-import '../style/Dragon.css'
-const Dragon = (props) => {
+import Header from "../all/Header";
+import dragonImg from '../../img/image 12.png';
+import '../../style/Dragon.css'
+const DragonInfo = (props) => {
     console.log(props.dragon)
     const [type,setType] = useState(props.dragon.type);
     const [className,setClassName] = useState(props.dragon.class);
@@ -42,4 +42,4 @@ const Dragon = (props) => {
     );
 };
 
-export default Dragon;
+export default DragonInfo;

@@ -4,6 +4,8 @@ import InputCust from "../../UI/input/InputCust";
 import ButtonCust from "../../UI/button/ButtonCust";
 import axios from "axios";
 import '../../style/Form.css'
+import {useNavigate} from "react-router-dom";
+import $api from "../../http/http";
 
 
 const Reg = () => {
@@ -15,7 +17,7 @@ const Reg = () => {
     const [surnameDirty, setSurnameDirty] = useState(false)
     const [surnameError, setSurnameError] = useState('Can\'t be empty')
 
-    const [gender, setGender] = useState('')
+    const [gender, setGender] = useState('male')
 
     const [date, setDate] = useState('')
     const [dateDirty, setDateDirty] = useState(false)
@@ -29,6 +31,9 @@ const Reg = () => {
     const [loginDirty, setLoginDirty] = useState(false)
     const [loginError, setLoginError] = useState('Can\'t be empty')
     const [formValid, setFormValid] = useState(false)
+
+    const [regError,setRegError] = useState('')
+    const navigate = useNavigate();
 
     const blurHandler = (e) => {
         switch (e.target.name) {
@@ -98,7 +103,7 @@ const Reg = () => {
         if (nameError || surnameError || dateError || loginError || passwordError)
             setFormValid(false)
         else setFormValid(true)
-    }, [nameError,surnameError,dateError,loginError,passwordError])
+    }, [nameError, surnameError, dateError, loginError, passwordError])
 
     const registration = (e) => {
         e.preventDefault();
@@ -113,11 +118,18 @@ const Reg = () => {
                 password: password
             };
             console.log(user_info)
-            axios.post(`http://localhost:8080/user/register`, {user_info})
+            axios.post(`http://localhost:8080/user/register`, user_info)
                 .then(res => {
-                    console.log(res);
-                }).catch((res) =>
-                console.log(res))
+                    navigate('/auth');
+                }).catch((err) => {
+                    console.log(err.response)
+                if(err.response.status === 409)
+                    setRegError(err.response.data.message)
+                else if (err.response.status === 400)
+                    setRegError('bad request')
+
+                }
+            )
         } else console.log('форма не валидна')
 
     }
@@ -189,6 +201,7 @@ const Reg = () => {
                            type="password"
                            onBlur={e => blurHandler(e)}
                            onChange={(e) => passwordHandler(e)}/>
+                { regError &&  <div style={{color: 'red'}}>{regError}</div>}
                 <ButtonCust type="submit" disabled={!formValid}>Sign Up</ButtonCust>
             </form>
         </div>

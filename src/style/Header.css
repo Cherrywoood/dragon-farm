@@ -10,3 +10,19 @@ header {
     color: teal;
     text-shadow: black -3px 2px;
 }
+
+
+nav {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-link {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
