@@ -27,12 +27,9 @@ const DragonCard = (dragon) => {
         <div className="dragon-card" onClick={clickHandler}>
             <p><span className='name'><b>{nameDragon}</b></span></p>
             <img src={dragonImg} alt="..."/>
-            {dragon.dragon.dragonCharacteristics.map((param, index) =>
-                index === 0? <HealthBar health={param.value} key={index}/> :
-                    index === 1? <MoodBar mood={param.value} key={index}/> :
-                        index === 2? <TrainBar train={param.value} key={index}/> : ''
-            )}
-
+            <HealthBar health={dragon.dragon.dragonCharacteristics.health} key='0'/>
+            <MoodBar mood={dragon.dragon.dragonCharacteristics.happiness} key='1'/>
+            <TrainBar train={dragon.dragon.dragonCharacteristics.training} key='2'/>
         </div>
 
     );

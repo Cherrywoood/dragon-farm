@@ -6,7 +6,11 @@ const TrainBar = (value) => {
     const [train, setTrain] = useState(value.train);
     const [statusTrain, setStatusTrain] = useState('bad');
 
-
+    function getTrain(train) {
+        if (train < 0) return 0
+        if (train > 100) return 100
+        return train
+    }
     useEffect(() => {
         if (Number(train) >= 80) setStatusTrain('good')
         if (Number(train) >= 40 && Number(train) < 80) setStatusTrain('normal')
@@ -15,7 +19,7 @@ const TrainBar = (value) => {
 
     return (
         <div className="bar">
-            Train: <Progress percent={train}
+            Train: <Progress percent={getTrain(train)}
                              status={statusTrain}
                              theme={
                                  {

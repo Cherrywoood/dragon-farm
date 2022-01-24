@@ -5,6 +5,11 @@ const HealthBar = (value) => {
    // console.log(value.health)
     const [health, setHealth] = useState(value.health);
     const [statusHealth, setStatusHealth] = useState('death');
+    function getHealth(health) {
+        if (health < 0) return 0
+        if (health > 100) return 100
+        return health
+    }
     useEffect(()=> {
         if(Number(health) >= 80) setStatusHealth('good')
         if(Number(health) >= 40 && Number(health) < 80) setStatusHealth('normal')
@@ -14,7 +19,7 @@ const HealthBar = (value) => {
     }, [health])
     return (
         <div className="bar">
-            Health : <Progress percent={health}
+            Health : <Progress percent={getHealth(health)}
                                status={statusHealth}
                                theme={
                                    {

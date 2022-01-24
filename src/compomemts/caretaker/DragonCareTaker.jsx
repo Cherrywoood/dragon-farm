@@ -6,51 +6,39 @@ import {Link, useParams} from "react-router-dom";
 import {m} from "framer-motion";
 import axios from "axios";
 
-const DragonCareTaker = ({id, characters}) => {
+const DragonCareTaker = ({id, characters, status}) => {
 
-    const [health, setHealth] = useState(characters[0].value);
-    const [mood, setMood] = useState(characters[1].value);
-    const [train, setTrain] = useState(characters[2].value);
+    const [health, setHealth] = useState(characters.health);
+    const [mood, setMood] = useState(characters.happiness);
+    const [train, setTrain] = useState(characters.training);
 
     useEffect(() => {
 
     })
-    const feedHandler = () => {
 
-    }
-    const playHandler = () => {
-
-
-    }
-    const treatHandler = () => {
-
-    }
-    const hitHandler = () => {
-        axios.create({
+    function actionHandler(type){
+        if (status !== 'alive') {
+            alert("You can't " + type + " the dragon with status = " + status)
+        } else axios.create({
             baseURL: '',
             headers: {
                 'Authorization': `${localStorage.getItem('token')}`
             }
         }).post("http://localhost:8080/dragon/action", {
-            actionType: "hit",
+            actionType: type,
             dragonId: id
         })
             .then(res => {
                 console.log(res)
-                setHealth(res.data.dragonCharacteristics[0].value)
-                setMood(res.data.dragonCharacteristics[1].value)
-                setTrain(res.data.dragonCharacteristics[2].value)
+                setHealth(res.data.dragonCharacteristics.health)
+                setMood(res.data.dragonCharacteristics.happiness)
+                setTrain(res.data.dragonCharacteristics.training)
+                window.location.reload();
             }).catch((err) => {
             console.log(err.response)
         })
     }
 
-    const scoldHandler = () => {
-
-    }
-    const trainHandler = () => {
-
-    }
     return (
         <div className="dragon-work">
 
@@ -58,15 +46,16 @@ const DragonCareTaker = ({id, characters}) => {
             <MoodBar mood={mood}/>
             <TrainBar train={train}/>
 
-            {localStorage.getItem('wortType') === 'user' ?
+            {localStorage.getItem('workerType') === 'caretaker' ?
                 <div className="buttons">
-                    <button className='button' onClick={feedHandler}>Feed</button>
-                    <button className='button' onClick={playHandler}>Play</button>
-                    <button className='button' onClick={treatHandler}>Treat</button>
+                    <button className='button' onClick={() => actionHandler('feed')}>Feed</button>
+                    <button className='button' onClick={() => actionHandler('play')}>Play</button>
+                    <button className='button' onClick={() => actionHandler('treat')}>Treat</button>
+                    <button className='button' onClick={() => actionHandler('hit')}>Hit</button>
                 </div> : <div className="buttons">
-                    <button className='button' onClick={hitHandler}>Hit</button>
-                    <button className='button' onClick={scoldHandler}>Scold</button>
-                    <button className='button' onClick={trainHandler}>Train</button>
+                    <button className='button' onClick={() => actionHandler('hit')}>Hit</button>
+                    <button className='button' onClick={() => actionHandler('scold')}>Scold</button>
+                    <button className='button' onClick={() => actionHandler('train')}>Train</button>
                 </div>
             }
         </div>

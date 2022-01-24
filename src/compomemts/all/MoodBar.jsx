@@ -3,9 +3,14 @@ import {Progress} from "react-sweet-progress";
 
 const MoodBar = (value) => {
     //console.log(value.mood)
-    const [mood, setMood] = useState(value.mood);
+    let [mood, setMood] = useState(value.mood);
     const [statusMood, setStatusMood] = useState('bad');
 
+    function getMood(mood) {
+        if (mood < 0) return 0
+        if (mood > 100) return 100
+        return mood
+    }
     useEffect(() => {
         if (Number(mood) >= 80) setStatusMood('good')
         if (Number(mood) >= 40 && Number(mood) < 80) setStatusMood('normal')
@@ -13,7 +18,7 @@ const MoodBar = (value) => {
     }, [mood])
     return (
         <div className="bar">
-            Mood: <Progress percent={mood}
+            Mood: <Progress percent={getMood(mood)}
                             status={statusMood}
                             theme={
                                 {

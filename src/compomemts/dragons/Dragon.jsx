@@ -27,7 +27,8 @@ const Dragon = () => {
             <div className="dragon-content"><img src={dragonImg} alt="..."/></div>
             <div id="dragon__info" className="dragon-content">
                 <span className='name'>{dragon && dragon.name}</span>
-                {dragon && <DragonCareTaker id={params.id}characters={dragon.dragonCharacteristics}/>}
+                <div className='status'>{dragon && dragon.dragonStatus}</div>
+                {dragon && <DragonCareTaker id={params.id} characters={dragon.dragonCharacteristics} status={dragon.dragonStatus}/>}
             </div>
         </div>
     );
