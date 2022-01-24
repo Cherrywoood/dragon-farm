@@ -5,19 +5,18 @@ import MyProgressBar from "../all/MyProgressBar";
 import '../../style/DragonCard.css'
 import ButtonCust from "../../UI/button/ButtonCust";
 import {useNavigate} from "react-router-dom";
-const DragonCard = (props) => {
-    const [name,setName] = useState('Name DragonInfo')
+const DragonCard = ({name,id}) => {
+    const [nameDragon,setNameDragon] = useState(name.name)
     const navigate = useNavigate();
-
+console.log(id)
     const clickHandler = () => {
-        navigate('/info');
+        navigate(`/info/${id}`);
     }
     return (
         <div className="dragon-card" onClick={clickHandler}>
-            <p><span className='name'><b>{name}</b></span></p>
+            <p><span className='name'><b>{nameDragon}</b></span></p>
             <img src={dragonImg} alt="..."/>
             <MyProgressBar/>
-            <ButtonCust onClick={clickHandler}>dfs</ButtonCust>
         </div>
 
     );

@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Header from "../all/Header";
 import dragonImg from '../../img/image 12.png';
 import '../../style/Dragon.css'
-const DragonInfo = (props) => {
-    console.log(props.dragon)
-    const [type,setType] = useState(props.dragon.type);
+const DragonInfo = () => {
+
+   /* const [type,setType] = useState(props.dragon.type);
     const [className,setClassName] = useState(props.dragon.class);
     const [rarity,setRarity] = useState(props.dragon.rarity);
     const [way_of_taming,setWay_of_taming] = useState(props.dragon.way_of_taming);
@@ -18,9 +18,7 @@ const DragonInfo = (props) => {
     const [fireType,setFireTyp] = useState(props.dragon.appearance.fire_type);
     const [features,setFeatures] = useState(props.dragon.appearance.features);
 
-    return (
-        <div className="dragon-info">
-            <h2>{type}</h2><br/>
+     <h2>{type}</h2><br/>
             <img src={dragonImg} alt="..."/>
             <h3>Main information</h3>
             Class: {className}<br/>
@@ -37,6 +35,10 @@ const DragonInfo = (props) => {
             color: {color}<br/>
             type of fire: {fireType}<br/>
             features: {features}<br/>
+*/
+    return (
+        <div className="dragon-info">
+           Вы попали на страницу
 
         </div>
     );

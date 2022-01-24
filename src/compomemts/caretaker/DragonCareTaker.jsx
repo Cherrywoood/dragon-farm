@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import MyProgressBar from "../all/MyProgressBar";
 import ButtonCust from "../../UI/button/ButtonCust";
+import {Button} from "@chakra-ui/react";
 
 const DragonCareTaker = () => {
     const [health, setHealth] = useState('0');
@@ -57,13 +58,15 @@ const DragonCareTaker = () => {
         plusTrain(5)
     }
     return (
-        <div>
+        <div className="dragon-caretaker">
             <MyProgressBar/>
-            <ButtonCust onClick ={feedHandler}>Feed</ButtonCust>
-            <ButtonCust onClick ={playHandler}>Play</ButtonCust>
-            <ButtonCust onClick ={vetHandler}>Vet</ButtonCust>
-            <ButtonCust onClick ={hitHandler}>Hit</ButtonCust>
-            <ButtonCust onClick ={scoldHandler}>Scold</ButtonCust>
+            <div className="buttons">
+                <Button className='button' onClick ={feedHandler}>Feed</Button>
+                <Button className='button' onClick ={playHandler}>Play</Button>
+                <Button className='button' onClick ={vetHandler}>Vet</Button>
+                <Button className='button' onClick ={hitHandler}>Hit</Button>
+                <Button className='button' onClick ={scoldHandler}>Scold</Button>
+            </div>
         </div>
     );
 };

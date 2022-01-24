@@ -4,7 +4,79 @@
 
 .dragon-info img {
     float:left;
-
     margin-right: 30px;
 }
+
+.dragon {
+    background: red;
+    width: 70%;
+    margin: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+.dragon .dragon-caretaker {
+    width: 100%;
+}
+.dragon .dragon-caretaker .ButtonCust{
+    width: 40px;
+}
+.dragon .dragon-caretaker .bar {
+    width: 100%;
+    margin: 10px;
+
+}
+.dragon .dragon-content {
+    width: 50%;
+    margin: 30px;
+    background: dimgray;
+}
+.dragon img {
+    width: 70%;
+    height: auto;
+}
+
+.dragon-caretaker .button {
+    padding: 5px 15px;
+    color: white;
+    background: teal;
+    border: teal;
+    cursor: pointer;
+    width: 100px;
+    margin: 10px 10px;
+    font-size: 14px;
+    font-family: "Century Gothic", serif;
+}
+
+.dragon-caretaker .button:focus {
+    background: lightseagreen;
+}
+
+.dragon-caretaker .button:disabled {
+    cursor: not-allowed;
+    background: dimgray;
+}
+#dragon__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    background: olive;
+}
+.dragon-content .name {
+    font-size: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: bisque;
+    justify-content: center;
+}
+
+
 

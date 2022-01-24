@@ -6,6 +6,7 @@ import NotFound from "./all/NotFound";
 import DragonInfo from "./dragons/DragonInfo";
 import DragonCardList from "./dragons/DragonCardList";
 import {AuthContext} from "../App";
+import Dragon from "./dragons/Dragon";
 
 
 const AppRouter = (dragon) => {
@@ -14,8 +15,9 @@ const AppRouter = (dragon) => {
     return (
         isAuth ?
             <Routes>
-                <Route path="/info" element={<DragonInfo dragon={dragon.dragon}/>}/>
-                <Route path="/list" element={<DragonCardList/>}/>
+                <Route exact path="/list" element={<DragonCardList/>}/>
+                <Route exact path="/info/:id" element={<DragonInfo/>}/>
+                <Route path="/dragon" element={<Dragon/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
             :

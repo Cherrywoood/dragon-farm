@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Progress} from "react-sweet-progress";
 import ButtonCust from "../../UI/button/ButtonCust";
 
-const MyProgressBar = ({healthProps, moodProps,trainProps}) => {
-    const [health, setHealth] = useState(healthProps.value);
-    const [statusHealth, setStatusHealth] = useState(healthProps.status);
-    const [mood, setMood] = useState(moodProps.value);
-    const [statusMood, setStatusMood] = useState(healthProps.status);
-    const [train, setTrain] = useState(trainProps.value);
-    const [statusTrain, setStatusTrain] = useState(trainProps.status);
+const MyProgressBar = () => {
+    const [health, setHealth] = useState('0');
+    const [statusHealth, setStatusHealth] = useState('death');
+    const [mood, setMood] = useState('0');
+    const [statusMood, setStatusMood] = useState('bad');
+    const [train, setTrain] = useState('0');
+    const [statusTrain, setStatusTrain] = useState('bad');
 
     useEffect(()=> {
         if(Number(health) >= 80) setStatusHealth('good')
