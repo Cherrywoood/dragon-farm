@@ -8,7 +8,6 @@
 }
 
 .dragon {
-    background: red;
     width: 70%;
     margin: 40px;
     display: flex;
@@ -16,13 +15,11 @@
     justify-content: space-between;
     align-content: center;
 }
-.dragon .dragon-caretaker {
+.dragon .dragon-work {
     width: 100%;
 }
-.dragon .dragon-caretaker .ButtonCust{
-    width: 40px;
-}
-.dragon .dragon-caretaker .bar {
+
+.dragon .dragon-work .bar {
     width: 100%;
     margin: 10px;
 
@@ -30,14 +27,13 @@
 .dragon .dragon-content {
     width: 50%;
     margin: 30px;
-    background: dimgray;
 }
 .dragon img {
     width: 70%;
     height: auto;
 }
 
-.dragon-caretaker .button {
+.dragon-work .button {
     padding: 5px 15px;
     color: white;
     background: teal;
@@ -49,11 +45,11 @@
     font-family: "Century Gothic", serif;
 }
 
-.dragon-caretaker .button:focus {
+.dragon-work .button:focus {
     background: lightseagreen;
 }
 
-.dragon-caretaker .button:disabled {
+.dragon-work .button:disabled {
     cursor: not-allowed;
     background: dimgray;
 }
@@ -64,7 +60,6 @@
     align-content: center;
     align-items: center;
     justify-items: center;
-    background: olive;
 }
 .dragon-content .name {
     font-size: 30px;
@@ -74,9 +69,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background: bisque;
-    justify-content: center;
+    justify-content: space-around;
 }
-
 
 

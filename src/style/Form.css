@@ -1,9 +1,11 @@
 .registration-form, .authentication-form {
-width: 100%;
     background-image: url("/public/dragon_back_1.png"), url("/public/dragon_back_2.png");
     background-position: left bottom, right top;
     background-size: auto 80%, auto 80%;
     background-repeat: no-repeat;
+}
+.registration-form, .authentication-form, .transfer-form{
+width: 100%;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -38,30 +40,10 @@ form span {
     font-size: 12px;
 }
 
-.outing-form {
-    position: fixed;
-    height: 100vh;
-    top: 0;
-    width: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+form input[type='checkbox'] {
+    margin: 10px;
+}
+form input[type='radio'] {
+    margin: 10px;
 }
 
-.outing-form form {
-    padding: 20px;
-    border-radius: 12px;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-content:space-between;
-   transform: scale(0);
-    color: black;
-}
-
-.outing-form .active {
-    transform: scale(1);
-    width: 250px;
-    height: 200px;
-}

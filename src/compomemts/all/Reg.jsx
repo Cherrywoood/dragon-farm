@@ -1,11 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../style/Form.css'
 import InputCust from "../../UI/input/InputCust";
 import ButtonCust from "../../UI/button/ButtonCust";
 import axios from "axios";
 import '../../style/Form.css'
 import {useNavigate} from "react-router-dom";
-import $api from "../../http/http";
 
 
 const Reg = () => {

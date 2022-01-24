@@ -1,72 +1,74 @@
-import React, {useState} from 'react';
-import MyProgressBar from "../all/MyProgressBar";
-import ButtonCust from "../../UI/button/ButtonCust";
-import {Button} from "@chakra-ui/react";
+import React, {useEffect, useState} from 'react';
+import HealthBar from "../all/HealthBar";
+import MoodBar from "../all/MoodBar";
+import TrainBar from "../all/TrainBar";
+import {Link, useParams} from "react-router-dom";
+import {m} from "framer-motion";
+import axios from "axios";
 
-const DragonCareTaker = () => {
-    const [health, setHealth] = useState('0');
-    const [statusHealth, setStatusHealth] = useState('death');
-    const [mood, setMood] = useState('0');
-    const [statusMood, setStatusMood] = useState('bad');
-    const [train, setTrain] = useState('0');
-    const [statusTrain, setStatusTrain] = useState('bad');
+const DragonCareTaker = ({id, characters}) => {
 
-    const plusHealth = (value) => {
-        if (Number(health)+5 >= 100) setHealth(100)
-        else setHealth(String(Number(health)+5))
-    }
-    const minusHealth = (value) => {
-        if (Number(health)-value <=0 ) setHealth(0)
-        else setHealth(String(Number(health)-value))
-    }
-    const plusMood = (value) => {
-        if (Number(mood)+value >= 100) setMood(100)
-        else setMood(String(Number(mood)+value))
-    }
-    const minusMood = (value) => {
-        if (Number(mood)-value <=0 ) setMood(0)
-        else setMood(String(Number(mood)-value))
-    }
-    const plusTrain = (value) => {
-        if (Number(train)+value >= 100) setTrain(100)
-        else setTrain(String(Number(train)+value))
-    }
-    const minusTrain  = (value) => {
-        if (Number(train)-value <=0 ) setTrain(0)
-        else setTrain(String(Number(train)-value))
-    }
+    const [health, setHealth] = useState(characters[0].value);
+    const [mood, setMood] = useState(characters[1].value);
+    const [train, setTrain] = useState(characters[2].value);
+
+    useEffect(() => {
+
+    })
     const feedHandler = () => {
-        plusHealth(5)
-        plusMood(2)
+
     }
     const playHandler = () => {
-        plusMood(5)
-        minusTrain(10)
+
+
     }
-    const vetHandler = () => {
-        plusHealth(10)
-        plusMood(2)
+    const treatHandler = () => {
+
     }
     const hitHandler = () => {
-        minusHealth(10)
-        minusMood(10)
-        plusTrain(10)
+        axios.create({
+            baseURL: '',
+            headers: {
+                'Authorization': `${localStorage.getItem('token')}`
+            }
+        }).post("http://localhost:8080/dragon/action", {
+            actionType: "hit",
+            dragonId: id
+        })
+            .then(res => {
+                console.log(res)
+                setHealth(res.data.dragonCharacteristics[0].value)
+                setMood(res.data.dragonCharacteristics[1].value)
+                setTrain(res.data.dragonCharacteristics[2].value)
+            }).catch((err) => {
+            console.log(err.response)
+        })
     }
 
     const scoldHandler = () => {
-        minusMood(5)
-        plusTrain(5)
+
+    }
+    const trainHandler = () => {
+
     }
     return (
-        <div className="dragon-caretaker">
-            <MyProgressBar/>
-            <div className="buttons">
-                <Button className='button' onClick ={feedHandler}>Feed</Button>
-                <Button className='button' onClick ={playHandler}>Play</Button>
-                <Button className='button' onClick ={vetHandler}>Vet</Button>
-                <Button className='button' onClick ={hitHandler}>Hit</Button>
-                <Button className='button' onClick ={scoldHandler}>Scold</Button>
-            </div>
+        <div className="dragon-work">
+
+            <HealthBar health={health}/>
+            <MoodBar mood={mood}/>
+            <TrainBar train={train}/>
+
+            {localStorage.getItem('wortType') === 'user' ?
+                <div className="buttons">
+                    <button className='button' onClick={feedHandler}>Feed</button>
+                    <button className='button' onClick={playHandler}>Play</button>
+                    <button className='button' onClick={treatHandler}>Treat</button>
+                </div> : <div className="buttons">
+                    <button className='button' onClick={hitHandler}>Hit</button>
+                    <button className='button' onClick={scoldHandler}>Scold</button>
+                    <button className='button' onClick={trainHandler}>Train</button>
+                </div>
+            }
         </div>
     );
 };

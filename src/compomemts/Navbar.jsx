@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
-import {AuthContext, UserContext} from "../App";
-import ButtonCust from "../UI/button/ButtonCust";
+import {AuthContext} from "../App";
+
 
 const Navbar = () => {
     const {isAuth, setIsAuth} = useContext(AuthContext)
@@ -13,11 +13,11 @@ const Navbar = () => {
         <nav>
             <div>
                 <span>
-                <Link to="" className="nav-link">My dragons</Link>
+                <Link to="/list" className="nav-link">My dragons</Link>
             </span>
-                {localStorage.getItem('role') === 'USER' ?
+                {localStorage.getItem('role') === 'user' ?
                     <span className="nav-item">
-                    <Link to="" className="nav-link">Rent a dragon</Link>
+                    <Link to="/transfer" className="nav-link">Rent a dragon</Link>
                 </span> : ""
                 }
             </div>

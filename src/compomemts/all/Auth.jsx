@@ -1,21 +1,59 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import InputCust from "../../UI/input/InputCust";
 import ButtonCust from "../../UI/button/ButtonCust";
 import axios from "axios";
 import '../../style/Form.css'
-import Header from "./Header";
 import '../../style/Form.css';
 import {Link, useNavigate} from "react-router-dom";
-import $api from "../../http/http";
 import {AuthContext, UserContext} from "../../App";
 
 const Auth = () => {
     const [password, setPassword] = useState('')
+    const [passwordDirty, setPasswordDirty] = useState(false)
+    const [passwordError, setPasswordError] = useState('Can\'t be empty')
+
     const [login, setLogin] = useState('')
+    const [loginDirty, setLoginDirty] = useState(false)
+    const [loginError, setLoginError] = useState('Can\'t be empty')
+    const [formValid, setFormValid] = useState(false)
+
     const [authError,setAuthError] = useState('')
     const {Auth,setIsAuth} = useContext(AuthContext)
     const {user,setUser} = useContext(UserContext)
     const navigate = useNavigate();
+    const blurHandler = (e) => {
+        switch (e.target.name) {
+            case 'login':
+                setLoginDirty(true)
+                break
+            case 'password':
+                setPasswordDirty(true)
+                break
+        }
+    }
+    const loginHandler = (e) => {
+        setLogin(e.target.value)
+        if (e.target.value === '') {
+            setLoginError('Can\'t be empty')
+        } else {
+            setLoginError('')
+        }
+    }
+    const passwordHandler = (e) => {
+        setPassword(e.target.value)
+        if (e.target.value.length < 8) {
+            if (e.target.value === "") setPasswordError('Can\'t be empty')
+            else setPasswordError('Length must be greater than 8')
+        } else {
+            setPasswordError('')
+        }
+    }
+    useEffect(() => {
+        if (loginError || passwordError)
+            setFormValid(false)
+        else setFormValid(true)
+    }, [loginError, passwordError])
+
     const authentication = (e)=> {
         e.preventDefault();
         const user_info = {
@@ -45,24 +83,32 @@ const Auth = () => {
                     setAuthError('Invalid password')
             }
         )
+
     }
+
     return (
         <div className='authentication-form'>
             <form onSubmit={authentication}>
                 <h2>Authentication</h2>
                 <label htmlFor="login">Login: </label>
+                {loginDirty && loginError && <div style={{color: 'red'}}>{loginError}</div>}
                 <InputCust value={login}
                            id="login"
+                           name="login"
                            type="text"
-                           onChange={(e)=>setLogin(e.target.value)}/> <br/>
+                           onBlur={e => blurHandler(e)}
+                           onChange={(e) => loginHandler(e)}/> <br/>
 
                 <label htmlFor="password">Password: </label>
+                {passwordDirty && passwordError && <div style={{color: 'red'}}>{passwordError}</div>}
                 <InputCust value={password}
                            id="password"
+                           name="password"
                            type="password"
-                           onChange={(e)=>setPassword(e.target.value)}/>
+                           onBlur={e => blurHandler(e)}
+                           onChange={(e) => passwordHandler(e)}/>
                 { authError &&  <div style={{color: 'red'}}>{authError}</div>}
-                <ButtonCust>Sign In</ButtonCust>
+                <ButtonCust disabled={!formValid}>Sign In</ButtonCust>
                 <Link to="/reg"> Registration?</Link>
             </form>
         </div>

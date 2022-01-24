@@ -7,6 +7,8 @@ import DragonInfo from "./dragons/DragonInfo";
 import DragonCardList from "./dragons/DragonCardList";
 import {AuthContext} from "../App";
 import Dragon from "./dragons/Dragon";
+import TransferForm from "./transfer/TransferForm";
+import DragonTransferList from "./dragons/DragonTransferList";
 
 
 const AppRouter = (dragon) => {
@@ -17,7 +19,9 @@ const AppRouter = (dragon) => {
             <Routes>
                 <Route exact path="/list" element={<DragonCardList/>}/>
                 <Route exact path="/info/:id" element={<DragonInfo/>}/>
-                <Route path="/dragon" element={<Dragon/>}/>
+                <Route path="/dragon/:id" element={<Dragon/>}/>
+                <Route path="/transfer" element={<TransferForm/>}/>
+                <Route path="/transfer/list" element={<DragonTransferList/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
             :

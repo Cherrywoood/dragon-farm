@@ -1,7 +1,5 @@
 import React, {useContext} from 'react';
 import '../../style/Header.css'
-import ButtonCust from "../../UI/button/ButtonCust";
-import {Link} from "react-router-dom";
 import Navbar from "../Navbar";
 import {AuthContext} from "../../App";
 const Header = () => {
