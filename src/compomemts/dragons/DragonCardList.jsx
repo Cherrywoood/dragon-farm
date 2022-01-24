@@ -23,9 +23,13 @@ const DragonCardList = () => {
     return (
 
         <div className="dragon-card-list">
-            {dragons.map((dragon, index) =>
-                <DragonCard dragon={dragon} key={dragon.id}/>
-            )}
+            {
+                dragons.length !== 0 ?
+                    dragons.map((dragon, index) =>
+                        <DragonCard dragon={dragon} key={dragon.id}/>)
+                    :
+                    <span className="no-dragon">List's empty...</span>
+            }
 
         </div>
     );

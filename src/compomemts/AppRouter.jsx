@@ -22,13 +22,13 @@ const AppRouter = (dragon) => {
                 <Route path="/dragon/:id" element={<Dragon/>}/>
                 <Route path="/transfer" element={<TransferForm/>}/>
                 <Route path="/transfer/list" element={<DragonTransferList/>}/>
-                <Route path="*" element={<NotFound/>}/>
+                <Route path="*" element={<DragonCardList/>}/>
             </Routes>
             :
         <Routes>
             <Route path="/auth" element={<Auth/>}/>
             <Route path="/reg" element={<Reg/>}/>
-            <Route path="*" element={<NotFound/>}/>
+            <Route path="*" element={<Auth/>}/>
         </Routes>
 
 

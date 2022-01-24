@@ -1,12 +1,25 @@
 .dragon-info {
-    margin: 30px 50px;
+    width: 90%;
+    margin-top: -20px;
+}
+
+.dragon-info button{
+    background: transparent;
+    font-size: 40px;
+    border: none;
+    cursor: pointer;
 }
 
 .dragon-info img {
     float:left;
-    margin-right: 30px;
+    width: 400px;
+    height: auto;
+    margin-right: 60px;
+    margin-bottom: 30px;
 }
-
+.content {
+    margin-left: 150px;
+}
 .dragon {
     width: 70%;
     margin: 40px;

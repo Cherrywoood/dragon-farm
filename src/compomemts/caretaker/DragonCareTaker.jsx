@@ -12,10 +12,10 @@ const DragonCareTaker = ({id, characters, status}) => {
     const [mood, setMood] = useState(characters.happiness);
     const [train, setTrain] = useState(characters.training);
 
+
     useEffect(() => {
 
     })
-
     function actionHandler(type){
         if (status !== 'alive') {
             alert("You can't " + type + " the dragon with status = " + status)
@@ -33,12 +33,10 @@ const DragonCareTaker = ({id, characters, status}) => {
                 setHealth(res.data.dragonCharacteristics.health)
                 setMood(res.data.dragonCharacteristics.happiness)
                 setTrain(res.data.dragonCharacteristics.training)
-                window.location.reload();
             }).catch((err) => {
-            console.log(err.response)
-        })
+                console.log(err.response)
+            })
     }
-
     return (
         <div className="dragon-work">
 

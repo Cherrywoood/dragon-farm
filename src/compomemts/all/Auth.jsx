@@ -5,7 +5,7 @@ import axios from "axios";
 import '../../style/Form.css'
 import '../../style/Form.css';
 import {Link, useNavigate} from "react-router-dom";
-import {AuthContext, UserContext} from "../../App";
+import {AuthContext} from "../../App";
 
 const Auth = () => {
     const [password, setPassword] = useState('')
@@ -18,8 +18,7 @@ const Auth = () => {
     const [formValid, setFormValid] = useState(false)
 
     const [authError,setAuthError] = useState('')
-    const {Auth,setIsAuth} = useContext(AuthContext)
-    const {user,setUser} = useContext(UserContext)
+    const {setIsAuth} = useContext(AuthContext)
     const navigate = useNavigate();
     const blurHandler = (e) => {
         switch (e.target.name) {
@@ -73,7 +72,6 @@ const Auth = () => {
                 localStorage.setItem('userName',res.data.userName)
                 localStorage.setItem('reputation', res.data.reputation)
                 console.log(localStorage.getItem('token'))
-                console.log(user)
                 setIsAuth(true)
                 navigate('/list');
             }).catch((err) => {

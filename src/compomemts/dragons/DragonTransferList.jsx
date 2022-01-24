@@ -2,15 +2,21 @@ import React, {useEffect, useState} from 'react';
 import DragonCard from "./DragonCard";
 
 const DragonTransferList = () => {
-    const [dragon, setDragon] = useState()
+    const [dragons, setDragons] = useState([])
     useEffect(()=>{
-        setDragon(localStorage.getItem('dragonTransfer'))
-        console.log(dragon)
+        setDragons(JSON.parse(localStorage.getItem('dragonTransfer')))
+        console.log(JSON.parse(localStorage.getItem('dragonTransfer'))
+        )
     },[])
     return (
             <div className="dragon-card-list">
-                {console.log(dragon)}
-
+                {
+                    dragons.length !== 0?
+                        dragons.map(dragon =>
+                            <DragonCard dragon={dragon} key={dragon.id}/>)
+                        :
+                        <span className="no-dragon">No dragons found by request...</span>
+                }
             </div>
     );
 };

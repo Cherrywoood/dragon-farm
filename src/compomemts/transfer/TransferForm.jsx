@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import InputCust from "../../UI/input/InputCust";
+import React, {useContext, useEffect, useState} from 'react';
 import ButtonCust from "../../UI/button/ButtonCust";
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import "../../style/Form.css"
 import axios from "axios";
-import DragonTransferList from "../dragons/DragonTransferList";
 
 const TransferForm = () => {
     const [classBoulder, setClassBoulder] = useState("")
@@ -60,7 +58,8 @@ const TransferForm = () => {
         }).post(`http://localhost:8080/transfer/all`, transfer_info)
             .then(res => {
                 console.log(res)
-                localStorage.setItem('dragonTransfer', res)
+                localStorage.setItem('dragonTransfer',JSON.stringify(res.data))
+                localStorage.setItem('transferType', type)
                 navigate("/transfer/list")
             }).catch((err) => {
                 console.log(err.response)

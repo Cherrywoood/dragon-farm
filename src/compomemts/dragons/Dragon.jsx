@@ -23,7 +23,6 @@ const Dragon = () => {
     }, [])
     return (
         <div className="dragon">
-
             <div className="dragon-content"><img src={dragonImg} alt="..."/></div>
             <div id="dragon__info" className="dragon-content">
                 <span className='name'>{dragon && dragon.name}</span>

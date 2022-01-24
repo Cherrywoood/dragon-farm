@@ -8,33 +8,29 @@ import "react-sweet-progress/lib/style.css";
 
 
 export const AuthContext = createContext(null);
-export const UserContext = createContext(null);
+
 function App() {
     const [isAuth, setIsAuth] = useState(false)
-    const [user, setUser] = useState(null)
 
-    useEffect(()=> {
-        if(localStorage.getItem('token')) {
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
             setIsAuth(true)
         }
     })
     return (
-       <AuthContext.Provider value={{
-           isAuth,
-           setIsAuth
-       }}>
-           <UserContext.Provider value={{
-               user,
-               setUser
-           }}>
-               <BrowserRouter>
-                   <div className="app">
-                       <Header/>
-                       <AppRouter/>
-                   </div>
-               </BrowserRouter>
-           </UserContext.Provider>
-       </AuthContext.Provider>
+        <AuthContext.Provider value={{
+            isAuth,
+            setIsAuth
+        }}>
+
+            <BrowserRouter>
+                <Header/>
+                <div className="app">
+                    <AppRouter/>
+                </div>
+            </BrowserRouter>
+
+        </AuthContext.Provider>
     );
 }
 
