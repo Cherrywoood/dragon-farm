@@ -71,6 +71,7 @@ const Auth = () => {
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('workerType',res.data.workerType)
                 localStorage.setItem('userName',res.data.userName)
+                localStorage.setItem('reputation', res.data.reputation)
                 console.log(localStorage.getItem('token'))
                 console.log(user)
                 setIsAuth(true)

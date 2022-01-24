@@ -20,8 +20,10 @@ const Navbar = () => {
                     <Link to="/transfer" className="nav-link">Rent a dragon</Link>
                 </span> : ""
                 }
+                <span>reputation: {localStorage.getItem('reputation')}</span>
             </div>
             <Link className="nav-link" to="/auth" onClick={logOutHandler}>Log Out</Link>
+
         </nav>
     );
 };
