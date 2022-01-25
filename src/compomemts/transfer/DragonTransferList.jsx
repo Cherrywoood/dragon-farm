@@ -12,6 +12,10 @@ const DragonTransferList = () => {
         console.log(JSON.parse(localStorage.getItem('dragonTransfer'))
         )
     },[])
+    const removeDragon = (id)=>{
+        console.log('dragonTransfer')
+        setDragons(dragons.filter(d => d.id !== id))
+    }
     return (
             <div className="dragon-card-list">
                 <ModalWindow visible={visible} setVisible={setVisible}>{error}</ModalWindow>
@@ -21,7 +25,7 @@ const DragonTransferList = () => {
                             <div className="card" key={dragon.id}>
                                 <DragonCard dragon={dragon} />
                                 <TransferDragon id={dragon.id} setError={setError}
-                                                setVisible={setVisible}/>
+                                                setVisible={setVisible} remove={removeDragon}/>
                             </div>
                     )
                         :

@@ -23,6 +23,11 @@ const DragonCardList = () => {
             console.log(err.response)
         })
     }, [])
+
+    const removeDragon = (id)=>{
+        console.log('dragonRent')
+        setDragons(dragons.filter(d => d.id !== id))
+    }
     return (
 
         <div className="dragon-card-list">
@@ -32,7 +37,7 @@ const DragonCardList = () => {
                         localStorage.getItem('role') === 'user' ?
                             <div className="card" key={dragon.id}>
                                 <DragonCard dragon={dragon}/>
-                                <ReturnDragon id={dragon.id}/>
+                                <ReturnDragon remove={removeDragon} id={dragon.id}/>
                             </div>
                             :
                             <div className="card" key={dragon.id}>

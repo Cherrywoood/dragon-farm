@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import ButtonCust from "../../UI/button/ButtonCust";
 import axios from "axios";
 
-const TransferDragon = ({id, setError, setVisible}) => {
+const TransferDragon = ({id, setError, setVisible, remove}) => {
     const transferHandler = (e) => {
       e.stopPropagation()
         axios.create({
@@ -16,6 +16,7 @@ const TransferDragon = ({id, setError, setVisible}) => {
         })
             .then(res => {
                 console.log(res)
+                remove(id)
             }).catch((err) => {
                 console.log(err.response)
             if(err.response.status === 409) {

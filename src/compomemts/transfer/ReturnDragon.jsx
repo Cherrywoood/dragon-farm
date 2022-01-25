@@ -3,7 +3,7 @@ import ButtonCust from "../../UI/button/ButtonCust";
 import axios from "axios";
 import {RepContext} from "../../App";
 
-const ReturnDragon = ({id}) => {
+const ReturnDragon = ({id, remove}) => {
     console.log(id)
     const {setReputation} = useContext(RepContext)
     const returnHandler = (e) => {
@@ -18,7 +18,7 @@ const ReturnDragon = ({id}) => {
                 console.log(res)
                 setReputation(res.data.reputation)
                 localStorage.setItem('reputation',res.data.reputation)
-
+                remove(id)
             }).catch((err) => {
             console.log(err)
         })
