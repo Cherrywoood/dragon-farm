@@ -1,17 +1,16 @@
 import React, {useContext} from 'react';
 import { Route, Routes} from "react-router-dom";
-import Auth from "./all/Auth";
-import Reg from "./all/Reg";
-import NotFound from "./all/NotFound";
-import DragonInfo from "./dragons/DragonInfo";
-import DragonCardList from "./dragons/DragonCardList";
-import {AuthContext} from "../App";
-import Dragon from "./dragons/Dragon";
-import TransferForm from "./transfer/TransferForm";
-import DragonTransferList from "./dragons/DragonTransferList";
+import Auth from "./Auth";
+import Reg from "./Reg";
+import DragonInfo from "../dragons/DragonInfo";
+import DragonCardList from "../dragons/DragonCardList";
+import {AuthContext} from "../../App";
+import Dragon from "../dragons/Dragon";
+import TransferForm from "../transfer/TransferForm";
+import DragonTransferList from "../transfer/DragonTransferList";
 
 
-const AppRouter = (dragon) => {
+const AppRouter = () => {
     const {isAuth} = useContext(AuthContext)
     console.log(isAuth)
     return (

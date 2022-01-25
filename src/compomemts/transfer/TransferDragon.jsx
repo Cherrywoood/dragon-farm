@@ -2,11 +2,9 @@ import React, {useContext} from 'react';
 import ButtonCust from "../../UI/button/ButtonCust";
 import axios from "axios";
 
-const TransferDragon = (id) => {
+const TransferDragon = ({id, setError, setVisible}) => {
     const transferHandler = (e) => {
       e.stopPropagation()
-        console.log({ transferType: localStorage.getItem('transferType'),
-            dragonId: id.id})
         axios.create({
             baseURL: '',
             headers: {
@@ -14,12 +12,16 @@ const TransferDragon = (id) => {
             }
         }).post("http://localhost:8080/transfer/", {
             transferType: localStorage.getItem('transferType'),
-            dragonId: id.id
+            dragonId: id
         })
             .then(res => {
                 console.log(res)
             }).catch((err) => {
-            console.log(err.response)
+                console.log(err.response)
+            if(err.response.status === 409) {
+                setError(err.response.data.message)
+                setVisible(true)
+            }
         })
     }
     return (

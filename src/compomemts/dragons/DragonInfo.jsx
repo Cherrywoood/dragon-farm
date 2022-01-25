@@ -35,7 +35,7 @@ const DragonInfo = () => {
                         Class: {dragon.className} <br/>
                         Type: {dragon.typeName} <br/>
                         Gender: {dragon.gender} <br/>
-                        Age: {dragon.dateOfBirth} <br/>
+                        Age: {dragon.age} <br/>
                         Status: {dragon.dragonStatus} <br/>
                         Training Level: {dragon.trainingLevel}<br/>
                     </div>

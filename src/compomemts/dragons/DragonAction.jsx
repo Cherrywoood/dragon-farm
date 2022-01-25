@@ -6,7 +6,7 @@ import {Link, useParams} from "react-router-dom";
 import {m} from "framer-motion";
 import axios from "axios";
 
-const DragonCareTaker = ({id, characters, status}) => {
+const DragonAction = ({id, characters, status, setDragonStatus, setError, setVisible}) => {
 
     const [health, setHealth] = useState(characters.health);
     const [mood, setMood] = useState(characters.happiness);
@@ -18,7 +18,8 @@ const DragonCareTaker = ({id, characters, status}) => {
     })
     function actionHandler(type){
         if (status !== 'alive') {
-            alert("You can't " + type + " the dragon with status = " + status)
+           setError("You can't " + type + " the dragon with status = " + status)
+            setVisible(true)
         } else axios.create({
             baseURL: '',
             headers: {
@@ -33,6 +34,7 @@ const DragonCareTaker = ({id, characters, status}) => {
                 setHealth(res.data.dragonCharacteristics.health)
                 setMood(res.data.dragonCharacteristics.happiness)
                 setTrain(res.data.dragonCharacteristics.training)
+                setDragonStatus(res.data.dragonStatus)
             }).catch((err) => {
                 console.log(err.response)
             })
@@ -44,7 +46,8 @@ const DragonCareTaker = ({id, characters, status}) => {
             <MoodBar mood={mood}/>
             <TrainBar train={train}/>
 
-            {localStorage.getItem('workerType') === 'caretaker' ?
+            {localStorage.getItem('role') === 'worker' ?
+                localStorage.getItem('workerType') === 'caretaker'?
                 <div className="buttons">
                     <button className='button' onClick={() => actionHandler('feed')}>Feed</button>
                     <button className='button' onClick={() => actionHandler('play')}>Play</button>
@@ -54,10 +57,19 @@ const DragonCareTaker = ({id, characters, status}) => {
                     <button className='button' onClick={() => actionHandler('hit')}>Hit</button>
                     <button className='button' onClick={() => actionHandler('scold')}>Scold</button>
                     <button className='button' onClick={() => actionHandler('train')}>Train</button>
+                </div> :
+                <div className="buttons">
+                    <button className='button' onClick={() => actionHandler('feed')}>Feed</button>
+                    <button className='button' onClick={() => actionHandler('play')}>Play</button>
+                    <button className='button' onClick={() => actionHandler('treat')}>Treat</button>
+                    <button className='button' onClick={() => actionHandler('hit')}>Hit</button>
+                    <button className='button' onClick={() => actionHandler('scold')}>Scold</button>
+                    <button className='button' onClick={() => actionHandler('train')}>Train</button>
                 </div>
+
             }
         </div>
     );
 };
 
-export default DragonCareTaker;
+export default DragonAction;

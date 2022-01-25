@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
-import {AuthContext} from "../App";
+import {AuthContext, RepContext} from "../../App";
 
 
 const Navbar = () => {
-    const {isAuth, setIsAuth} = useContext(AuthContext)
+    const {setIsAuth} = useContext(AuthContext)
+    const {reputation} = useContext(RepContext)
     const logOutHandler = () => {
         localStorage.clear()
         setIsAuth(false)
@@ -20,7 +21,9 @@ const Navbar = () => {
                     <Link to="/transfer" className="nav-link">Rent a dragon</Link>
                 </span> : ""
                 }
-                <span>reputation: {localStorage.getItem('reputation')}</span>
+                {localStorage.getItem('role') === 'user' ?
+                    <span>reputation: {reputation}</span> : ""
+                }
             </div>
             <Link className="nav-link" to="/auth" onClick={logOutHandler}>Log Out</Link>
 

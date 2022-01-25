@@ -76,10 +76,10 @@ const Auth = () => {
                 navigate('/list');
             }).catch((err) => {
                 console.log(err.response)
-                if(err.response.status === 404)
+                if(err.response.status === 500)
+                    setAuthError("User not found")
+                else if (err.response.status === 401)
                     setAuthError(err.response.data.message)
-                else if (err.response.status === 403)
-                    setAuthError('Invalid password')
             }
         )
 

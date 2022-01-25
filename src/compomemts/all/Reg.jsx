@@ -16,7 +16,9 @@ const Reg = () => {
     const [surnameDirty, setSurnameDirty] = useState(false)
     const [surnameError, setSurnameError] = useState('Can\'t be empty')
 
-    const [gender, setGender] = useState('male')
+    const [gender, setGender] = useState('')
+    const [isCheckedGender, setIsCheckedGender] = useState(false)
+    const [genderError, setGenderError] = useState('Not checked')
 
     const [date, setDate] = useState('')
     const [dateDirty, setDateDirty] = useState(false)
@@ -70,7 +72,13 @@ const Reg = () => {
         }
     }
     const genderHandler = (e) => {
-        setGender(e.target.value)
+        if(e.target.checked) {
+            setGender(e.target.value)
+            setIsCheckedGender(true)
+        } else {
+            setGender("")
+            setIsCheckedGender(false)
+        }
     }
     const dateHandler = (e) => {
         setDate(e.target.value)
@@ -99,10 +107,10 @@ const Reg = () => {
     }
     useEffect(() => {
 
-        if (nameError || surnameError || dateError || loginError || passwordError)
+        if (nameError || surnameError || dateError || loginError || passwordError || !isCheckedGender)
             setFormValid(false)
         else setFormValid(true)
-    }, [nameError, surnameError, dateError, loginError, passwordError])
+    }, [nameError, surnameError, dateError, loginError, passwordError, isCheckedGender])
 
     const registration = (e) => {
         e.preventDefault();
@@ -161,7 +169,6 @@ const Reg = () => {
                        onBlur={e => blurHandler(e)}
                        onChange={e => genderHandler(e)}
                        name="gender"
-                       checked={true}
                 />
                 <label htmlFor="male">Male </label>
 

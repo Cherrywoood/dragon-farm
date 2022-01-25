@@ -19,21 +19,20 @@ const TransferForm = () => {
     const [isCheckedTidal, setIsCheckedTidal] = useState(false)
     const [classTracker, setClassTracker] = useState("")
     const [isCheckedTracker, setIsCheckedTracker] = useState(false)
+    const [type, setType] = useState('')
+    const [isCheckedType, setIsCheckedType] = useState(false)
     const [formValid, setFormValid] = useState(false)
-    const [type, setType] = useState("temporal")
+
 
     useEffect(() => {
-
+        console.log(!isCheckedType)
         if (!isCheckedBoulder && !isCheckedMystery && !isCheckedSharp && !isCheckedStoker && !isCheckedStrike
-        && !isCheckedTidal && !isCheckedTracker)
+        && !isCheckedTidal && !isCheckedTracker || !isCheckedType)
             setFormValid(false)
         else setFormValid(true)
 
-    }, [isCheckedBoulder,isCheckedMystery, isCheckedSharp, isCheckedStoker, isCheckedStrike,isCheckedTidal,isCheckedTracker])
+    }, [isCheckedBoulder,isCheckedMystery, isCheckedSharp, isCheckedStoker, isCheckedStrike,isCheckedTidal,isCheckedTracker, isCheckedType])
     const navigate = useNavigate();
-    const typeHandler = (e) => {
-        setType(e.target.value)
-    }
 
     const find = (e) => {
         e.preventDefault();
@@ -67,8 +66,17 @@ const TransferForm = () => {
             }
         )
     }
-    const bolderHandler = (e) => {
 
+    const typeHandler = (e) => {
+        if(e.target.checked) {
+            setType(e.target.value)
+            setIsCheckedType(true)
+        } else {
+            setType("")
+            setIsCheckedType(false)
+        }
+    }
+    const bolderHandler = (e) => {
       if(e.target.checked) {
           setClassBoulder("Boulder")
           setIsCheckedBoulder(true)
@@ -148,7 +156,7 @@ const TransferForm = () => {
                         <input type="checkbox" onClick={sharpHandler}/>
                         Sharp
                     </label>
-                    <label> <input type="checkbox" onClick={sharpHandler}/>
+                    <label> <input type="checkbox" onClick={stokerHandler}/>
                         Stoker
                     </label>
                     <label> <input type="checkbox" onClick={strikeHandler}/>
@@ -166,8 +174,7 @@ const TransferForm = () => {
                     <label> <input type="radio"
                                    value="temporal"
                                    onChange={typeHandler}
-                                   name="type"
-                                   checked="checked"/>
+                                   name="type"/>
                         Temporal </label>
                     <label> <input type="radio"
                                    value="permanent"

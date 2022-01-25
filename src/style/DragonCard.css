@@ -1,4 +1,4 @@
-.dragon-card {
+.card {
     text-align: center;
     border: 2px solid teal;
     padding: 30px;
@@ -6,19 +6,19 @@
 
 }
 
-.dragon-card:hover {
+.card:hover {
     cursor: pointer;
 }
 
-.dragon-card img {
+.card img {
     margin-bottom: 20px;
 }
 
-.dragon-card .bar {
+.card .bar {
     width: 100%;
 }
 
-.dragon-card .name {
+.card .name {
     font-size: 20px;
 }
 
